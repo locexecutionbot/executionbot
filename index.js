@@ -135,7 +135,7 @@ client.on('interactionCreate', async interaction => {
       
       const embed = new EmbedBuilder()
         .setColor('#FF0000')
-        .setTitle('⚔️ Execution')
+        .setTitle(' Execution')
         .setDescription(`**Executed:** ${executedUser}\n**Executor:** ${user}`)
         .setTimestamp()
         .setFooter({ text: 'discord.gg/locx' });
@@ -212,7 +212,7 @@ client.on('interactionCreate', async interaction => {
         .setDescription('Here are all available execution commands:')
         .addFields(
           { name: '/executionsetup <channel>', value: 'Set the execution channel (requires Manage Server permission)' },
-          { name: '/executionadd <user>', value: 'Add an execution to the execution channel (with ⬆️ and ⬇️ reactions)' },
+          { name: '/executionadd <user>', value: 'Add an execution to the execution channel' },
           { name: '/executionremove <message-id>', value: 'Remove your own execution' },
           { name: '/executionremovestaff <message-id>', value: 'Remove any execution (requires Manage Messages permission)' },
           { name: '/executioncommands', value: 'Show this help message' }
