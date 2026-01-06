@@ -55,8 +55,8 @@ app.get('/', (req, res) => {
     </head>
     <body>
         <div class="container">
-            <h1> Discord Execution Bot</h1>
-            <div class="status">✅ Online and Monitoring</div>
+            <h1> Bot</h1>
+            <div class="status"> Online and Monitoring</div>
             <div class="ping-time" id="pingTime">Last ping: ${lastPing || 'Starting...'}</div>
         </div>
         <script>
