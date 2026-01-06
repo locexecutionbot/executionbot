@@ -110,7 +110,7 @@ client.on('interactionCreate', async interaction => {
   try {
     if (commandName === 'executionsetup') {
       if (!member.permissions.has(PermissionFlagsBits.ManageGuild)) {
-        return interaction.reply({ content: '❌ You need the Manage Server permission to use this command!', ephemeral: true });
+        return interaction.reply({ content: 'You need the Manage Server permission to use this command!', ephemeral: true });
       }
 
       const executionChannel = options.getChannel('channel');
@@ -121,13 +121,13 @@ client.on('interactionCreate', async interaction => {
       configData[interaction.guildId].executionChannelId = executionChannel.id;
       saveData();
 
-      await interaction.reply({ content: `✅ Execution channel set to ${executionChannel}!`, ephemeral: true });
+      await interaction.reply({ content: ` Execution channel set to ${executionChannel}!`, ephemeral: true });
 
     } else if (commandName === 'executionadd') {
       const executionChannelId = configData[interaction.guildId]?.executionChannelId;
       
       if (!executionChannelId) {
-        return interaction.reply({ content: '❌ Execution channel not set! Please ask an admin to use `/executionsetup` first.', ephemeral: true });
+        return interaction.reply({ content: 'Execution channel not set! Please ask an admin to use `/executionsetup` first.', ephemeral: true });
       }
 
       const executionChannel = await client.channels.fetch(executionChannelId);
@@ -155,17 +155,17 @@ client.on('interactionCreate', async interaction => {
       };
       saveData();
 
-      await interaction.reply({ content: `✅ Execution added in ${executionChannel}!`, ephemeral: true });
+      await interaction.reply({ content: ` Execution added in ${executionChannel}!`, ephemeral: true });
 
     } else if (commandName === 'executionremove') {
       const messageId = options.getString('message-id');
       
       if (!executionsData[interaction.guildId]?.[messageId]) {
-        return interaction.reply({ content: '❌ Execution not found!', ephemeral: true });
+        return interaction.reply({ content: 'Execution not found!', ephemeral: true });
       }
 
       if (executionsData[interaction.guildId][messageId].executorId !== user.id) {
-        return interaction.reply({ content: '❌ You can only remove your own executions!', ephemeral: true });
+        return interaction.reply({ content: 'You can only remove your own executions!', ephemeral: true });
       }
 
       try {
@@ -176,20 +176,20 @@ client.on('interactionCreate', async interaction => {
         delete executionsData[interaction.guildId][messageId];
         saveData();
         
-        await interaction.reply({ content: '✅ Execution removed successfully!', ephemeral: true });
+        await interaction.reply({ content: 'Execution removed successfully!', ephemeral: true });
       } catch (error) {
-        await interaction.reply({ content: '❌ Could not find or delete the execution message!', ephemeral: true });
+        await interaction.reply({ content: 'Could not find or delete the execution message!', ephemeral: true });
       }
 
     } else if (commandName === 'executionremovestaff') {
       if (!member.permissions.has(PermissionFlagsBits.ManageMessages)) {
-        return interaction.reply({ content: '❌ You need the Manage Messages permission to use this command!', ephemeral: true });
+        return interaction.reply({ content: 'You need the Manage Messages permission to use this command!', ephemeral: true });
       }
 
       const messageId = options.getString('message-id');
       
       if (!executionsData[interaction.guildId]?.[messageId]) {
-        return interaction.reply({ content: '❌ Execution not found!', ephemeral: true });
+        return interaction.reply({ content: ' Execution not found!', ephemeral: true });
       }
 
       try {
@@ -200,15 +200,15 @@ client.on('interactionCreate', async interaction => {
         delete executionsData[interaction.guildId][messageId];
         saveData();
         
-        await interaction.reply({ content: '✅ Execution removed successfully!', ephemeral: true });
+        await interaction.reply({ content: 'Execution removed successfully!', ephemeral: true });
       } catch (error) {
-        await interaction.reply({ content: '❌ Could not find or delete the execution message!', ephemeral: true });
+        await interaction.reply({ content: ' Could not find or delete the execution message!', ephemeral: true });
       }
 
     } else if (commandName === 'executioncommands') {
       const embed = new EmbedBuilder()
         .setColor('#0099ff')
-        .setTitle('📋 Execution Commands')
+        .setTitle(' Execution Commands')
         .setDescription('Here are all available execution commands:')
         .addFields(
           { name: '/executionsetup <channel>', value: 'Set the execution channel (requires Manage Server permission)' },
@@ -225,7 +225,7 @@ client.on('interactionCreate', async interaction => {
   } catch (error) {
     console.error('Error handling command:', error);
     if (!interaction.replied && !interaction.deferred) {
-      await interaction.reply({ content: '❌ An error occurred while executing the command.', ephemeral: true });
+      await interaction.reply({ content: ' An error occurred while executing the command.', ephemeral: true });
     }
   }
 });
