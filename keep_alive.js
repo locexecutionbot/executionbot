@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
     <!DOCTYPE html>
     <html>
     <head>
-        <title>🤖 Discord Bot Status</title>
+        <title> Discord Bot Status</title>
         <meta http-equiv="refresh" content="30">
         <style>
             body { 
@@ -55,10 +55,8 @@ app.get('/', (req, res) => {
     </head>
     <body>
         <div class="container">
-            <h1>🤖 Discord Execution Bot</h1>
+            <h1> Discord Execution Bot</h1>
             <div class="status">✅ Online and Monitoring</div>
-            <p class="info">Auto-pinging every 5 minutes to stay awake</p>
-            <p class="info">discord.gg/locx</p>
             <div class="ping-time" id="pingTime">Last ping: ${lastPing || 'Starting...'}</div>
         </div>
         <script>
