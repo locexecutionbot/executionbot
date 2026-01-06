@@ -1,6 +1,11 @@
 const { Client, GatewayIntentBits, EmbedBuilder, PermissionFlagsBits, ActivityType, ChannelType } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
+const { startKeepAlive } = require('./keep_alive');
+
+// Start keep-alive system FIRST (before Discord client)
+console.log('Starting keep-alive system...');
+startKeepAlive();
 
 const client = new Client({
   intents: [
@@ -161,7 +166,7 @@ client.on('interactionCreate', async interaction => {
       const messageId = options.getString('message-id');
       
       if (!executionsData[interaction.guildId]?.[messageId]) {
-        return interaction.reply({ content: 'Execution not found!', ephemeral: true });
+        return interaction.reply({ content: ' Execution not found!', ephemeral: true });
       }
 
       if (executionsData[interaction.guildId][messageId].executorId !== user.id) {
@@ -176,9 +181,9 @@ client.on('interactionCreate', async interaction => {
         delete executionsData[interaction.guildId][messageId];
         saveData();
         
-        await interaction.reply({ content: 'Execution removed successfully!', ephemeral: true });
+        await interaction.reply({ content: ' Execution removed successfully!', ephemeral: true });
       } catch (error) {
-        await interaction.reply({ content: 'Could not find or delete the execution message!', ephemeral: true });
+        await interaction.reply({ content: ' Could not find or delete the execution message!', ephemeral: true });
       }
 
     } else if (commandName === 'executionremovestaff') {
@@ -212,7 +217,7 @@ client.on('interactionCreate', async interaction => {
         .setDescription('Here are all available execution commands:')
         .addFields(
           { name: '/executionsetup <channel>', value: 'Set the execution channel (requires Manage Server permission)' },
-          { name: '/executionadd <user>', value: 'Add an execution to the execution channel' },
+          { name: '/executionadd <user>', value: 'Add an execution to the execution channel (with ⬆️ and ⬇️ reactions)' },
           { name: '/executionremove <message-id>', value: 'Remove your own execution' },
           { name: '/executionremovestaff <message-id>', value: 'Remove any execution (requires Manage Messages permission)' },
           { name: '/executioncommands', value: 'Show this help message' }
